@@ -1,0 +1,27 @@
+{
+  "name": "foyou/m3u8",
+  "description": "主要是下载m3u8,也包括简单的curl的请求方法和简单的文件下载。可设置header头，代码就几行，可自行修改。",
+  "keywords": [
+    "curl",
+    "get",
+    "post",
+    "http",
+    "https",
+    "download",
+    "m3u8"
+  ],
+  "require": {
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "foyou",
+      "email": "1478449280@qq.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "": "src"
+    }
+  }
+}
