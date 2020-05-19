@@ -85,20 +85,21 @@ class m3u8
 
     function down_m3u8($http, $m3u8, $filename, $header = [])
     {
+        if (!file_exists($this->work_dir)) {
+            mkdir($this->work_dir);
+        }
         if (!file_exists($filename)) {
             preg_match_all('/,\n(.*\.ts)/', $m3u8, $arr);
-            echo "正在下载 $filename ...\n";
-            echo '[';
-            echo str_repeat('-', count($arr[1]));
-            echo "]\n-";
-            file_put_contents($this->work_dir . 'tmp.ts', '');
+            echo "\n【正在下载】\n$filename\n[", str_repeat('-', count($arr[1])), "]\n-";
+            $tmp = $this->work_dir . 'tmp.ts';
+            file_put_contents($tmp, '');
             foreach ($arr[1] as $item) {
-                file_put_contents($this->work_dir . 'tmp.ts', $this->get($http . $item, $header), FILE_APPEND);
+                file_put_contents($tmp, $this->get($http . $item, $header), FILE_APPEND);
                 echo '>';
             }
-            echo "\n";
-            echo "$filename 下载完成.\n";
-            rename('tmp.ts', $this->work_dir . $filename);
+            echo "?\n";
+            echo "$filename\n【下载完成】\n\n";
+            rename($tmp, $this->work_dir . $filename . ".mp4");
             return $this->work_dir . $filename;
         }
         return false;
